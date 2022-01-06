@@ -35,8 +35,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import skimage.draw
 
-# Root directory of the project
-ROOT_DIR = os.path.abspath(os.getcwd())
+from config import *
+
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
@@ -44,8 +44,6 @@ from mrcnn.config import Config
 from mrcnn import visualize
 from mrcnn.visualize import display_instances
 from mrcnn import model as modellib, utils
-
-from config import *
 
 # Path to trained weights file
 COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, pretrained_model)
@@ -208,8 +206,8 @@ def get_ax(rows=1, cols=1, size=16):
 def detect_and_show(model, image_path = None):
     assert image_path
     dataset = CustomDataset()
-    # BALLOON_DIR = os.path.join(ROOT_DIR, args.dataset)
-    dataset.load_balloon(args.dataset, val_subset)
+    dataset_folder = os.path.join(ROOT_DIR, training_folder)
+    dataset.load_balloon(dataset_folder, val_subset)
 
     # Must call before using the dataset
     dataset.prepare()
